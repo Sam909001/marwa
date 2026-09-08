@@ -1,0 +1,801 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>عيد ميلاد سعيد يا مروة 🎉</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Lalezar&family=Tajawal:wght@400;500;700;900&display=swap');
+
+  :root{
+    --cream: #FFF4EC;
+    --pink: #FF6F91;
+    --pink-deep: #E84D75;
+    --teal: #4FBDBA;
+    --yellow: #FFC94A;
+    --plum: #3A2E39;
+    --lilac: #C9A6E0;
+    --card: #FFFFFF;
+    --radius: 22px;
+  }
+
+  *{ box-sizing: border-box; }
+
+  html{ scroll-behavior: smooth; }
+
+  body{
+    margin:0;
+    background: var(--cream);
+    color: var(--plum);
+    font-family: 'Tajawal', sans-serif;
+    overflow-x:hidden;
+    background-image:
+      radial-gradient(circle at 10% 20%, rgba(255,111,145,0.10) 0, transparent 40%),
+      radial-gradient(circle at 90% 10%, rgba(79,189,186,0.12) 0, transparent 35%),
+      radial-gradient(circle at 80% 80%, rgba(255,201,74,0.14) 0, transparent 40%);
+  }
+
+  h1,h2,h3, .display{
+    font-family: 'Lalezar', 'Tajawal', sans-serif;
+    font-weight:400;
+    letter-spacing: 0.5px;
+  }
+
+  a{ color:inherit; }
+
+  /* ---------- confetti canvas ---------- */
+  #confetti-canvas{
+    position: fixed;
+    inset:0;
+    pointer-events:none;
+    z-index: 50;
+  }
+
+  /* ---------- HERO ---------- */
+  .hero{
+    min-height: 100svh;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    text-align:center;
+    padding: 32px 20px;
+    position:relative;
+  }
+
+  .balloon{
+    position:absolute;
+    font-size: 42px;
+    animation: float 6s ease-in-out infinite;
+    opacity:0.9;
+    filter: drop-shadow(0 6px 8px rgba(0,0,0,0.08));
+  }
+  .b1{ top:8%; right:8%; animation-delay:0s; }
+  .b2{ top:20%; left:6%; font-size:34px; animation-delay:1.2s; }
+  .b3{ bottom:14%; right:14%; font-size:30px; animation-delay:2.1s; }
+  .b4{ bottom:8%; left:10%; font-size:46px; animation-delay:0.6s; }
+
+  @keyframes float{
+    0%, 100%{ transform: translateY(0) rotate(-3deg); }
+    50%{ transform: translateY(-22px) rotate(3deg); }
+  }
+
+  .eyebrow-badge{
+    background: var(--card);
+    border: 2px dashed var(--pink);
+    color: var(--pink-deep);
+    padding: 8px 20px;
+    border-radius: 999px;
+    font-size: 15px;
+    font-weight: 700;
+    margin-bottom: 22px;
+  }
+
+  .hero h1{
+    font-size: clamp(2.8rem, 9vw, 6rem);
+    color: var(--pink-deep);
+    margin: 0;
+    line-height: 1.15;
+    text-shadow: 3px 3px 0 var(--yellow);
+  }
+
+  .hero .name{
+    color: var(--teal);
+    text-shadow: 3px 3px 0 var(--lilac);
+  }
+
+  .hero p.sub{
+    max-width: 480px;
+    font-size: 1.15rem;
+    margin: 18px auto 34px;
+    line-height:1.9;
+  }
+
+  .btn{
+    border:none;
+    cursor:pointer;
+    font-family:'Tajawal', sans-serif;
+    font-weight:700;
+    font-size: 1.15rem;
+    padding: 16px 40px;
+    border-radius: 999px;
+    background: var(--pink);
+    color:white;
+    box-shadow: 0 8px 0 var(--pink-deep);
+    transition: transform 0.12s ease;
+  }
+  .btn:active{
+    transform: translateY(6px);
+    box-shadow: 0 2px 0 var(--pink-deep);
+  }
+
+  .scroll-hint{
+    margin-top: 44px;
+    font-size: 0.95rem;
+    opacity:0.6;
+    animation: bounce 2s infinite;
+  }
+  @keyframes bounce{
+    0%,100%{ transform: translateY(0); }
+    50%{ transform: translateY(8px); }
+  }
+
+  /* ---------- SECTION shared ---------- */
+  section{
+    padding: 90px 20px;
+    max-width: 960px;
+    margin: 0 auto;
+    scroll-margin-top: 64px;
+  }
+
+  .section-head{
+    text-align:center;
+    margin-bottom: 52px;
+  }
+  .section-head .kicker{
+    color: var(--teal);
+    font-weight: 700;
+    font-size: 1rem;
+    display:block;
+    margin-bottom: 6px;
+  }
+  .section-head h2{
+    font-size: clamp(2rem, 6vw, 3.2rem);
+    color: var(--plum);
+    margin:0;
+  }
+
+  /* ---------- MEMORY LANE ---------- */
+  .gallery{
+    display:grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 18px;
+  }
+  @media (max-width: 640px){
+    .gallery{ grid-template-columns: repeat(2, 1fr); }
+  }
+
+  .frame{
+    position:relative;
+    aspect-ratio: 1 / 1;
+    border-radius: var(--radius);
+    overflow:hidden;
+    background: var(--card);
+    border: 4px solid white;
+    box-shadow: 0 10px 24px rgba(58,46,57,0.12);
+    transform: rotate(var(--tilt));
+    transition: transform 0.25s ease;
+  }
+  .frame:nth-child(odd){ --tilt: -3deg; }
+  .frame:nth-child(even){ --tilt: 3deg; }
+  .frame:hover{ transform: rotate(0deg) scale(1.04); }
+
+  .frame img{
+    width:100%; height:100%;
+    object-fit: cover;
+    display:block;
+  }
+
+  .frame .placeholder{
+    width:100%; height:100%;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    gap:6px;
+    background: linear-gradient(135deg, #fff, #fff0f4);
+    color: var(--pink-deep);
+    font-size:0.78rem;
+    text-align:center;
+    padding: 10px;
+  }
+  .frame .placeholder .emoji{ font-size: 26px; }
+  .frame .placeholder code{
+    background: rgba(255,111,145,0.12);
+    padding: 2px 8px;
+    border-radius: 6px;
+    font-size: 0.75rem;
+    direction: ltr;
+    display:inline-block;
+  }
+
+  .frame figcaption{
+    position:absolute;
+    bottom:0; right:0; left:0;
+    background: rgba(58,46,57,0.55);
+    color:white;
+    font-size: 0.8rem;
+    padding: 6px 10px;
+    text-align:center;
+  }
+
+  /* ---------- QUIZ ---------- */
+  .quiz-card{
+    background: var(--card);
+    border-radius: var(--radius);
+    padding: 36px 30px;
+    box-shadow: 0 14px 30px rgba(58,46,57,0.10);
+    text-align:center;
+  }
+
+  .quiz-progress{
+    display:flex;
+    justify-content:center;
+    gap:8px;
+    margin-bottom: 26px;
+  }
+  .quiz-progress span{
+    width:10px; height:10px;
+    border-radius:50%;
+    background: #eee;
+  }
+  .quiz-progress span.active{ background: var(--pink); }
+  .quiz-progress span.done{ background: var(--teal); }
+
+  .quiz-question{
+    font-size: 1.4rem;
+    margin-bottom: 26px;
+    min-height: 3.2rem;
+  }
+
+  .quiz-options{
+    display:grid;
+    gap: 12px;
+    max-width: 420px;
+    margin: 0 auto;
+  }
+
+  .quiz-option{
+    background: var(--cream);
+    border: 2px solid transparent;
+    border-radius: 14px;
+    padding: 14px 18px;
+    font-family:'Tajawal', sans-serif;
+    font-size: 1.05rem;
+    cursor:pointer;
+    transition: all 0.15s ease;
+  }
+  .quiz-option:hover{ border-color: var(--teal); }
+  .quiz-option.correct{ background: #DFF6E4; border-color:#4CAF50; }
+  .quiz-option.wrong{ background: #FCE1E4; border-color:#E85D6D; }
+
+  .quiz-feedback{
+    margin-top: 18px;
+    font-weight:700;
+    min-height: 1.6rem;
+  }
+
+  .quiz-result{
+    display:none;
+  }
+  .quiz-result .big{
+    font-size: 3.4rem;
+  }
+
+  .quiz-restart{
+    margin-top:18px;
+    background:none;
+    border: 2px solid var(--pink);
+    color: var(--pink-deep);
+    padding: 10px 26px;
+    border-radius: 999px;
+    font-weight:700;
+    cursor:pointer;
+    font-family:'Tajawal', sans-serif;
+  }
+
+  /* ---------- LETTER ---------- */
+  .letter-wrap{
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+  }
+
+  .envelope{
+    width: 220px;
+    height: 150px;
+    background: var(--pink);
+    border-radius: 12px;
+    position:relative;
+    cursor:pointer;
+    box-shadow: 0 12px 26px rgba(232,77,117,0.35);
+    transition: transform 0.2s ease;
+  }
+  .envelope:hover{ transform: translateY(-4px); }
+  .envelope::before{
+    content:"";
+    position:absolute;
+    top:0; left:0; right:0;
+    height:0;
+    border-left: 110px solid transparent;
+    border-right: 110px solid transparent;
+    border-top: 78px solid var(--pink-deep);
+  }
+  .envelope .heart{
+    position:absolute;
+    bottom: 18px; left:50%;
+    transform: translateX(-50%);
+    font-size: 26px;
+  }
+  .envelope-hint{
+    margin-top: 14px;
+    font-size:0.95rem;
+    opacity:0.7;
+  }
+
+  .letter-card{
+    max-width: 560px;
+    background: var(--card);
+    border-radius: var(--radius);
+    padding: 40px 36px;
+    box-shadow: 0 16px 34px rgba(58,46,57,0.14);
+    line-height: 2.1;
+    font-size: 1.12rem;
+    margin-top: 30px;
+    display:none;
+    position:relative;
+  }
+  .letter-card::before{
+    content:"💌";
+    position:absolute;
+    top:-24px; right: 50%;
+    transform: translateX(50%);
+    font-size: 34px;
+    background: var(--cream);
+    border-radius:50%;
+    padding: 8px 10px;
+  }
+  .letter-card .signature{
+    display:block;
+    margin-top: 24px;
+    font-family:'Lalezar', sans-serif;
+    font-size: 1.4rem;
+    color: var(--pink-deep);
+  }
+  .letter-card .signature-names{
+    display:block;
+    margin-top: 6px;
+    font-family: 'Tajawal', sans-serif;
+    font-weight: 700;
+    font-size: 1rem;
+    color: var(--plum);
+    opacity: 0.8;
+    letter-spacing: 1px;
+  }
+
+  /* ---------- FOOTER ---------- */
+  footer{
+    text-align:center;
+    padding: 60px 20px 80px;
+    color: var(--plum);
+    opacity:0.75;
+    font-size: 0.95rem;
+  }
+  footer .cake{ font-size: 30px; display:block; margin-bottom:10px; }
+
+  @media (prefers-reduced-motion: reduce){
+    .balloon, .scroll-hint{ animation: none !important; }
+  }
+
+  /* ---------- NAV ---------- */
+  .site-nav{
+    position: sticky;
+    top: 0;
+    z-index: 40;
+    display:flex;
+    justify-content:center;
+    gap: 6px;
+    padding: 12px 10px;
+    background: rgba(255,244,236,0.85);
+    backdrop-filter: blur(6px);
+    border-bottom: 2px dashed rgba(255,111,145,0.35);
+    flex-wrap: wrap;
+  }
+  .site-nav a{
+    text-decoration:none;
+    font-weight:700;
+    font-size: 0.92rem;
+    color: var(--plum);
+    padding: 8px 16px;
+    border-radius: 999px;
+    transition: background 0.15s ease, color 0.15s ease;
+  }
+  .site-nav a:hover,
+  .site-nav a.active{
+    background: var(--pink);
+    color: white;
+  }
+</style>
+</head>
+<body>
+
+<canvas id="confetti-canvas"></canvas>
+
+<nav class="site-nav">
+  <a href="#hero">الرئيسية</a>
+  <a href="#gallery-section">الذكريات</a>
+  <a href="#quiz-section">الاختبار</a>
+  <a href="#letter-section">الرسالة</a>
+</nav>
+
+<!-- ===================== HERO ===================== -->
+<section class="hero" id="hero">
+  <span class="balloon b1">🎈</span>
+  <span class="balloon b2">🎉</span>
+  <span class="balloon b3">🎂</span>
+  <span class="balloon b4">🎁</span>
+
+  <span class="eyebrow-badge">مفاجأة خاصة جدًا</span>
+  <h1>عيد ميلاد سعيد يا<br><span class="name">مروة</span> 🎊</h1>
+  <p class="sub">أَعْدَدْنا لكِ صفحة صغيرة تحمل كل ما تستحقينه من فرح وسرور... افتحي المفاجأة وابدئي الرحلة 🎈</p>
+  <button class="btn" id="openSurprise">افتحي المفاجأة 🎁</button>
+  <div class="scroll-hint">انزلي إلى الأسفل لاكتشاف المفاجآت ⬇</div>
+</section>
+
+<!-- ===================== MEMORY LANE ===================== -->
+<section id="gallery-section">
+  <div class="section-head">
+    <span class="kicker">ذكريات جميلة</span>
+    <h2>أجمل اللحظات مع مروة 📸</h2>
+  </div>
+  <div class="gallery" id="gallery">
+    <!-- 6 photo frames with fallback placeholders -->
+    <figure class="frame">
+      <img src="photo1.jpg" alt="ذكرى ١" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+      <div class="placeholder" style="display:none;">
+        <span class="emoji">📷</span>
+        سمي الصورة<br><code>photo1.jpg</code>
+      </div>
+      <figcaption>ذكرى ١</figcaption>
+    </figure>
+    <figure class="frame">
+      <img src="photo2.jpg" alt="ذكرى ٢" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+      <div class="placeholder" style="display:none;">
+        <span class="emoji">📷</span>
+        سمي الصورة<br><code>photo2.jpg</code>
+      </div>
+      <figcaption>ذكرى ٢</figcaption>
+    </figure>
+    <figure class="frame">
+      <img src="photo3.jpg" alt="ذكرى ٣" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+      <div class="placeholder" style="display:none;">
+        <span class="emoji">📷</span>
+        سمي الصورة<br><code>photo3.jpg</code>
+      </div>
+      <figcaption>ذكرى ٣</figcaption>
+    </figure>
+    <figure class="frame">
+      <img src="photo4.jpg" alt="ذكرى ٤" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+      <div class="placeholder" style="display:none;">
+        <span class="emoji">📷</span>
+        سمي الصورة<br><code>photo4.jpg</code>
+      </div>
+      <figcaption>ذكرى ٤</figcaption>
+    </figure>
+    <figure class="frame">
+      <img src="photo5.jpg" alt="ذكرى ٥" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+      <div class="placeholder" style="display:none;">
+        <span class="emoji">📷</span>
+        سمي الصورة<br><code>photo5.jpg</code>
+      </div>
+      <figcaption>ذكرى ٥</figcaption>
+    </figure>
+    <figure class="frame">
+      <img src="photo6.jpg" alt="ذكرى ٦" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+      <div class="placeholder" style="display:none;">
+        <span class="emoji">📷</span>
+        سمي الصورة<br><code>photo6.jpg</code>
+      </div>
+      <figcaption>ذكرى ٦</figcaption>
+    </figure>
+  </div>
+</section>
+
+<!-- ===================== QUIZ ===================== -->
+<section id="quiz-section">
+  <div class="section-head">
+    <span class="kicker">اختبار ممتع</span>
+    <h2>هل تعرفين نفسكِ جيدًا يا مروة؟ 🤔</h2>
+  </div>
+
+  <div class="quiz-card">
+    <div class="quiz-progress" id="quizProgress"></div>
+    <div class="quiz-question" id="quizQuestion"></div>
+    <div class="quiz-options" id="quizOptions"></div>
+    <div class="quiz-feedback" id="quizFeedback"></div>
+
+    <div class="quiz-result" id="quizResult">
+      <div class="big" id="quizEmoji">🎉</div>
+      <h3 id="quizResultText"></h3>
+      <button class="quiz-restart" id="quizRestart">العبي مرة أخرى 🔁</button>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== LETTER ===================== -->
+<section id="letter-section">
+  <div class="section-head">
+    <span class="kicker">كلمة من القلب</span>
+    <h2>افتحي الرسالة 💌</h2>
+  </div>
+  <div class="letter-wrap">
+    <div class="envelope" id="envelope">
+      <span class="heart">💗</span>
+    </div>
+    <div class="envelope-hint">اضغطي على الظرف لقراءة الرسالة</div>
+
+    <div class="letter-card" id="letterCard">
+      عزيزتي مروة،<br><br>
+      في هذا اليوم، أردنا أن نخبركِ بأنكِ إنسانة رائعة تستحقين كل ما هو جميل في هذه الحياة.
+      مع مرور كل عام، تضيفين فرحًا جديدًا لكل من حولكِ، وهذه أجمل هدية يمكن أن يقدّمها إنسان.
+      نتمنى لكِ عامًا مليئًا بالصحة والسعادة والنجاح، وأن تتحقق أحلامكِ واحدًا تلو الآخر.<br><br>
+      كل عام وأنتِ بخير يا أعزّ مروة 🎂💗
+      <span class="signature">بكل حب ❤️</span>
+      <span class="signature-names">دعاء • محمد • مجد • منذر</span>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <span class="cake">🎂</span>
+  صُنعت بحب من أجلكِ يا مروة
+</footer>
+
+<script>
+/* ================= CONFETTI ================= */
+const canvas = document.getElementById('confetti-canvas');
+const ctx = canvas.getContext('2d');
+let confettiPieces = [];
+
+function resizeCanvas(){
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
+}
+resizeCanvas();
+window.addEventListener('resize', resizeCanvas);
+
+const confettiColors = ['#FF6F91','#4FBDBA','#FFC94A','#C9A6E0','#E84D75'];
+
+function burstConfetti(count = 140){
+  for(let i=0;i<count;i++){
+    confettiPieces.push({
+      x: Math.random()*canvas.width,
+      y: -20 - Math.random()*canvas.height*0.3,
+      size: 6 + Math.random()*6,
+      color: confettiColors[Math.floor(Math.random()*confettiColors.length)],
+      speedY: 2 + Math.random()*3,
+      speedX: -1.5 + Math.random()*3,
+      rotation: Math.random()*360,
+      rotSpeed: -6 + Math.random()*12,
+      shape: Math.random() > 0.5 ? 'rect' : 'circle'
+    });
+  }
+}
+
+function animateConfetti(){
+  ctx.clearRect(0,0,canvas.width,canvas.height);
+  confettiPieces.forEach(p => {
+    p.x += p.speedX;
+    p.y += p.speedY;
+    p.rotation += p.rotSpeed;
+    ctx.save();
+    ctx.translate(p.x, p.y);
+    ctx.rotate(p.rotation * Math.PI/180);
+    ctx.fillStyle = p.color;
+    if(p.shape === 'rect'){
+      ctx.fillRect(-p.size/2, -p.size/2, p.size, p.size*0.6);
+    } else {
+      ctx.beginPath();
+      ctx.arc(0,0,p.size/2,0,Math.PI*2);
+      ctx.fill();
+    }
+    ctx.restore();
+  });
+  confettiPieces = confettiPieces.filter(p => p.y < canvas.height + 30);
+  requestAnimationFrame(animateConfetti);
+}
+animateConfetti();
+
+document.getElementById('openSurprise').addEventListener('click', () => {
+  burstConfetti(180);
+  document.getElementById('gallery-section').scrollIntoView({behavior:'smooth'});
+});
+
+/* ================= QUIZ ================= */
+const quizData = [
+  {
+    q: "ما الذي يمنحكِ السعادة الحقيقية؟",
+    options: ["لحظة هدوء بمفردي 🌿","لقاء الأحباء 💗","إنجاز شيء جديد 🌟","مفاجأة غير متوقعة 🎁"],
+    correct: 0
+  },
+  {
+    q: "كيف تفضلين قضاء وقت فراغكِ؟",
+    options: ["بالراحة والاسترخاء 😌","بالخروج واكتشاف أماكن جديدة 🚶‍♀️","بمشاهدة شيء ممتع 🎬","بتجربة هواية جديدة 🎨"],
+    correct: 0
+  },
+  {
+    q: "في رأيكِ، ما أجمل هدية يمكن أن يقدّمها إنسان؟",
+    options: ["هدية مادية جميلة 🎀","وقت صادق مع من نحب 💗","كلمة طيبة أو مفاجأة بسيطة 🌸","تجربة أو رحلة جديدة 🌍"],
+    correct: 2
+  },
+  {
+    q: "لو اخترتِ لونًا يعبّر عنكِ، ماذا تختارين؟",
+    options: ["الوردي 💗","الأصفر ☀️","التركواز 🩵","البنفسجي 💜"],
+    correct: 0
+  }
+];
+
+let currentQ = 0;
+let score = 0;
+
+const quizProgress = document.getElementById('quizProgress');
+const quizQuestion = document.getElementById('quizQuestion');
+const quizOptions = document.getElementById('quizOptions');
+const quizFeedback = document.getElementById('quizFeedback');
+const quizResult = document.getElementById('quizResult');
+const quizResultText = document.getElementById('quizResultText');
+const quizCardArea = document.querySelector('.quiz-card');
+
+function renderProgress(){
+  quizProgress.innerHTML = '';
+  quizData.forEach((_, i) => {
+    const dot = document.createElement('span');
+    if(i < currentQ) dot.classList.add('done');
+    if(i === currentQ) dot.classList.add('active');
+    quizProgress.appendChild(dot);
+  });
+}
+
+function renderQuestion(){
+  if(currentQ >= quizData.length){
+    showResult();
+    return;
+  }
+  renderProgress();
+  const item = quizData[currentQ];
+  quizQuestion.textContent = item.q;
+  quizFeedback.textContent = '';
+  quizOptions.innerHTML = '';
+  item.options.forEach((opt, idx) => {
+    const btn = document.createElement('button');
+    btn.className = 'quiz-option';
+    btn.textContent = opt;
+    btn.addEventListener('click', () => selectAnswer(idx, btn));
+    quizOptions.appendChild(btn);
+  });
+}
+
+function selectAnswer(idx, btn){
+  const item = quizData[currentQ];
+  const allButtons = quizOptions.querySelectorAll('.quiz-option');
+  allButtons.forEach(b => b.style.pointerEvents = 'none');
+
+  if(idx === item.correct){
+    btn.classList.add('correct');
+    quizFeedback.textContent = 'إجابة جميلة! 🎉';
+    quizFeedback.style.color = '#4CAF50';
+    score++;
+  } else {
+    btn.classList.add('wrong');
+    allButtons[item.correct].classList.add('correct');
+    quizFeedback.textContent = 'إجابة مختلفة، ولكنها جميلة أيضًا 😄';
+    quizFeedback.style.color = '#E85D6D';
+  }
+
+  setTimeout(() => {
+    currentQ++;
+    renderQuestion();
+  }, 1100);
+}
+
+function showResult(){
+  quizQuestion.style.display = 'none';
+  quizOptions.style.display = 'none';
+  quizFeedback.style.display = 'none';
+  quizProgress.style.display = 'none';
+  quizResult.style.display = 'block';
+
+  let msg = '';
+  if(score === quizData.length){
+    msg = 'رائع! يبدو أنكِ تعرفين نفسكِ جيدًا 💗';
+  } else if(score >= quizData.length/2){
+    msg = 'نتيجة جميلة! أنتِ تفهمين نفسكِ أكثر مما تتصورين 😄';
+  } else {
+    msg = 'العدد ليس هو المهم... المهم أننا نحبكِ 🎉';
+  }
+  quizResultText.textContent = msg + ' (' + score + '/' + quizData.length + ')';
+  burstConfetti(90);
+}
+
+document.getElementById('quizRestart').addEventListener('click', () => {
+  currentQ = 0;
+  score = 0;
+  quizQuestion.style.display = 'block';
+  quizOptions.style.display = 'grid';
+  quizFeedback.style.display = 'block';
+  quizProgress.style.display = 'flex';
+  quizResult.style.display = 'none';
+  renderQuestion();
+});
+
+renderQuestion();
+
+/* ================= BIRTHDAY MELODY ================= */
+/* "Happy Birthday to You" tune, synthesized (no external file needed) */
+let audioCtx = null;
+
+const NOTE_FREQ = {
+  C4: 261.63, D4: 293.66, E4: 329.63, F4: 349.23,
+  G4: 392.00, A4: 440.00, Bb4: 466.16, C5: 523.25
+};
+
+// [note, duration in seconds]
+const melody = [
+  ['C4',0.3], ['C4',0.3], ['D4',0.45], ['C4',0.45], ['F4',0.45], ['E4',0.9],
+  ['C4',0.3], ['C4',0.3], ['D4',0.45], ['C4',0.45], ['G4',0.45], ['F4',0.9],
+  ['C4',0.3], ['C4',0.3], ['C5',0.45], ['A4',0.45], ['F4',0.45], ['E4',0.45], ['D4',0.9],
+  ['Bb4',0.3], ['Bb4',0.3], ['A4',0.45], ['F4',0.45], ['G4',0.45], ['F4',0.9]
+];
+
+function playBirthdayTune(){
+  try{
+    if(!audioCtx){
+      audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+    }
+    if(audioCtx.state === 'suspended'){
+      audioCtx.resume();
+    }
+    let t = audioCtx.currentTime + 0.05;
+    melody.forEach(([note, dur]) => {
+      const freq = NOTE_FREQ[note];
+      const osc = audioCtx.createOscillator();
+      const gain = audioCtx.createGain();
+      osc.type = 'sine';
+      osc.frequency.value = freq;
+      gain.gain.setValueAtTime(0, t);
+      gain.gain.linearRampToValueAtTime(0.25, t + 0.03);
+      gain.gain.linearRampToValueAtTime(0.0001, t + dur * 0.95);
+      osc.connect(gain);
+      gain.connect(audioCtx.destination);
+      osc.start(t);
+      osc.stop(t + dur);
+      t += dur * 1.05;
+    });
+  } catch(e){
+    console.log('Audio not available:', e);
+  }
+}
+
+/* ================= LETTER ================= */
+document.getElementById('envelope').addEventListener('click', function(){
+  document.getElementById('letterCard').style.display = 'block';
+  this.style.display = 'none';
+  document.querySelector('.envelope-hint').style.display = 'none';
+  burstConfetti(60);
+  playBirthdayTune();
+  document.getElementById('letterCard').scrollIntoView({behavior:'smooth', block:'center'});
+});
+</script>
+
+</body>
+</html>
